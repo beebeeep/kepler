@@ -53,24 +53,9 @@ end
 -- Increase the size of the rectangle every frame.
 function love.update(dt)
     world:update(dt)
+  
     for i = 1, #objects do
-        --[[fx = 0
-        fy = 0
-        for j = 1, #objects do
-            if i == j then goto next end
-            src = objects[i]
-            tgt = objects[j]
-            dist, dx, dy = getDist(src, tgt)
-            f = GRAVITY*tgt.body:getMass()/(dist*dist)
-            src.f = f
-            a = math.atan2(dy, dx)
-            fx = fx + f*math.cos(a)
-            fy = fy + f*math.sin(a)
-            ::next::
-        end
-        src.body:applyForce(fx, fy)
-        --]]
-        applyGravity(objects[i], objects)
+       applyGravity(objects[i], objects)
     end
 
     applyGravity(ship, objects)
