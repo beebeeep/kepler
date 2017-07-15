@@ -1,6 +1,6 @@
 w = 800
 h = 600
-GRAVITY=10000
+GRAVITY=100
 math.randomseed(os.time())
 
 function getDist(src, tgt) 
@@ -16,7 +16,7 @@ function applyGravity(me, bodies)
         obj = bodies[i]
         if me.id == obj.id then goto next end
         dist, dx, dy = getDist(me, obj)
-        f = GRAVITY*obj.body:getMass()/(dist*dist)
+        f = GRAVITY*me.body:getMass()*obj.body:getMass()/(dist*dist)
         a = math.atan2(dy, dx)
         fx = fx + f*math.cos(a)
         fy = fy + f*math.sin(a)
@@ -36,7 +36,7 @@ function love.load()
         obj.shape = love.physics.newCircleShape(10)
         obj.fixture = love.physics.newFixture(obj.body, obj.shape, 1)
         obj.fixture:setRestitution(0.9)
-        obj.body:setLinearVelocity(25 - math.random(50), 25 - math.random(50))
+        -- obj.body:setLinearVelocity(25 - math.random(50), 25 - math.random(50))
         objects[i] = obj
     end
     ship = {}
